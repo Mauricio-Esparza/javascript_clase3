@@ -1,39 +1,35 @@
-// Simulador cancion de cancha actualizado clase3
+// quiz de cultura general
 
 function pedirRespuesta(pregunta) {
-  return prompt(pregunta); 
+  return prompt(pregunta);
 }
-function validarRespuesta(respuesta, correcta) {
-  return respuesta && respuesta.toLowerCase() === correcta;
+
+function validarRespuesta(respuestaUsuario, respuestaCorrecta) {
+  return respuestaUsuario && respuestaUsuario.toLowerCase() === respuestaCorrecta.toLowerCase();
 }
+
 const mostrarMensaje = (mensaje) => alert(mensaje);
-const RESPUESTA_CORRECTA = "es un ingles";
-let intentos = 0;
-let acierto = false;
 
-while (intentos < 3 && !acierto) {
-  const respuestaUsuario = pedirRespuesta("Complete la frase: El que no salta ");
+const preguntas = [
+  { pregunta: "a que equipo pertenece el estadio antonio vespucio liberti?", respuesta: "river plate" },
+  { pregunta: "a que estadio le falta la mitad?", respuesta: "boca" },
+  { pregunta: "a que equipo le dicen el pincha?", respuesta: "estudiantes" },
+  { pregunta: "yo me equivoque y pague, pero la pelota...:", respuesta: "no se mancha" }
+];
 
-  if (validarRespuesta(respuestaUsuario, RESPUESTA_CORRECTA)) {
-    acierto = true;
-    mostrarMensaje("Tené que cerrar el estadio, los genios hacen eso.Sapee!");
+let puntaje = 0;
+
+for (let i = 0; i < preguntas.length; i++) {
+  const respuestaUsuario = pedirRespuesta(preguntas[i].pregunta);
+
+  if (validarRespuesta(respuestaUsuario, preguntas[i].respuesta)) {
+    puntaje++;
+    mostrarMensaje("buena esa! puntaje actual: " + puntaje);
   } else {
-    intentos++;
-
-    switch (intentos) {
-      case 1:
-        mostrarMensaje;("se te escapo la tortuga, maestro")
-        break;
-      case 2:
-        mostrarMensaje("Are you, by any chance, the little witch Veron?");
-        break;
-      case 3:
-        mostrarMensaje(" Usté se tiene que arrepentir de lo que dijo.");
-        break;
-    }
+    mostrarMensaje("ni ahi!! la respuesta era: " + preguntas[i].respuesta);
   }
 }
 
-if (!acierto) {
-  mostrarMensaje("Anda pa' alla bobo.");
-}
+
+mostrarMensaje("pitazo final, tus puntos son: " + puntaje + " de " + preguntas.length);
+
